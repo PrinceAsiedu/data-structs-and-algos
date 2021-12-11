@@ -66,15 +66,15 @@
 #             char_file.write('\t{}\t\t\t {}\n'.format(i, char)) #unicode_char))
 # except Exception as e:
 #     print(e)
-import collections
-def sum(values):
-    if not isinstance(values, collections.Iterable):
-        raise TypeError('Values must be iterable')
-    total = 0
-    for v in values:
-        if not isinstance(v, (int, float)):
-            raise TypeError('Values must be numeric')
-        total += v
-    return total
+# import collections
+# def sum(values):
+#     if not isinstance(values, collections.Iterable):
+#         raise TypeError('Values must be iterable')
+#     total = 0
+#     for v in values:
+#         if not isinstance(v, (int, float)):
+#             raise TypeError('Values must be numeric')
+#         total += v
+#     return total
 
-sum(5)
+# sum(5)
