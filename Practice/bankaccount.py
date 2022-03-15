@@ -77,6 +77,6 @@ if __name__ == '__main__':
     print(a.get_balance())
     print('\n')
     a + 250
-    100-a
+    100 - a
     a.print_account_statement()
     print(a.get_balance())
