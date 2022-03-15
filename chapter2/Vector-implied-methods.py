@@ -5,7 +5,7 @@ class Vector:
 
     def __init__(self, d):
         """Create a d-dimensional vector of zeros"""
-        self._coords = [] * d
+        self._coords = [0] * d
 
     def __len__(self):
         """Return the dimension of the vector"""
@@ -39,3 +39,17 @@ class Vector:
     def __str__(self):
         """Produce string representation of vector"""
         return '<' + str(self._coords)[1:-1] + '>'
+
+
+if __name__ == '__main__':
+    v = Vector(5)
+    v[1] = 23  # <0, 23, 0, 0, 0> (based on use of setitem )
+    v[-1] = 45  # <0, 23, 0, 0, 45> (also via setitem )
+    print(v[4])  # print 45 (via getitem )
+    u = v + v  # <0, 46, 0, 0, 90> (via add )
+    print(u)  # print <0, 46, 0, 0, 90>
+    total = 0
+    for entry in v:  # implicit iteration via len and getitem
+        total += entry
+        print(total)
+    print(total)
