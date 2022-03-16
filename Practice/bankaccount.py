@@ -2,14 +2,17 @@
 # Prince Oforh Asiedu
 # 15-03-22
 
+from re import S
+
+
 class BankAccount:
     """A class for conducting bank account operations"""
 
     def __init__(self, initial_balance=None):
         self._balance = initial_balance # the initial amount in the account
-        self._account_history = [] # a list record of operations performed during account lifetime
+        self._account_history = 'account_log.txt' # a list record of operations performed during account lifetime
         self._action = ''
-    
+
     def deposit(self, amount):
         """Add money to the account."""
         self._balance += amount # increment account balance by amount
@@ -27,9 +30,15 @@ class BankAccount:
     
     def print_account_statement(self):
         """Print the account statement."""
-        if self._account_history:
-            print("Your Account Statement\n----------------------")
-            for action in self._account_history:
+        with open(self._account_history, 'r') as account_log:
+            acc_log = account_log.readlines()
+
+        if acc_log:
+            print('hello. we are here')
+            acc_log = [line.strip() for line in acc_log if acc_log]
+            print(acc_log)
+            print('we are even here')
+            for action in acc_log:
                 print(str(action))
         else:
             print('You haven\'t performed any transactions on your account yet!')
@@ -38,17 +47,23 @@ class BankAccount:
     
     def account_logger(self, action=None, amount=0):
         """Update account transaction log"""
-        if action == 'd' and amount > 0:
-            self._account_history.append('DEPOSIT: %s' % amount)
+        statement = 'Your Account History\n----------------------\n'
+        with open(self._account_history, 'r+') as account_log:
+            lines = account_log.readlines()
+            if not lines:
+                account_log.write(statement)
 
-        elif action == 'w' and amount > 0:
-            self._account_history.append('WITHDRAWAL: %s' % amount)
+            if action == 'd' and amount > 0:
+                account_log.write('DEPOSIT: %s\n' % amount)
 
-        elif action == 'g':
-            self._account_history.append('BALANCE REQUEST: %s' % self._balance)
+            elif action == 'w' and amount > 0:
+                account_log.write('WITHDRAWAL: %s\n' % amount)
 
-        elif action == 'p':
-            self._account_history.append('ACCOUNT STATEMENT REQUEST') 
+            elif action == 'g':
+                account_log.write('BALANCE REQUEST: %s\n' % self._balance)
+
+            elif action == 'p':
+                account_log.write('ACCOUNT STATEMENT REQUEST\n')
 
     def __str__(self):
         print('Your balance: ', self._balance())
@@ -77,6 +92,5 @@ if __name__ == '__main__':
     print(a.get_balance())
     print('\n')
     a + 250
-    100 - a
     a.print_account_statement()
     print(a.get_balance())
