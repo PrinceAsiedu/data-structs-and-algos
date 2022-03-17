@@ -2,9 +2,6 @@
 # Prince Oforh Asiedu
 # 15-03-22
 
-from re import S
-
-
 class BankAccount:
     """A class for conducting bank account operations"""
 
@@ -34,10 +31,7 @@ class BankAccount:
             acc_log = account_log.readlines()
 
         if acc_log:
-            print('hello. we are here')
             acc_log = [line.strip() for line in acc_log if acc_log]
-            print(acc_log)
-            print('we are even here')
             for action in acc_log:
                 print(str(action))
         else:
@@ -87,10 +81,6 @@ class BankAccount:
 
 if __name__ == '__main__':
     a = BankAccount(500)
-    a.deposit(150)
-    a.withdraw(50)
-    print(a.get_balance())
-    print('\n')
+    
     a + 250
     a.print_account_statement()
-    print(a.get_balance())
