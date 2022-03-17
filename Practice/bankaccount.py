@@ -27,25 +27,31 @@ class BankAccount:
     
     def print_account_statement(self):
         """Print the account statement."""
+        self.account_logger(action='p')
         with open(self._account_history, 'r') as account_log:
             acc_log = account_log.readlines()
 
         if acc_log:
             acc_log = [line.strip() for line in acc_log if acc_log]
-            for action in acc_log:
-                print(str(action))
+            for line in acc_log:
+                print(line)
         else:
             print('You haven\'t performed any transactions on your account yet!')
         print("\nThanks for banking with us.")
-        self.account_logger(action='p')
     
     def account_logger(self, action=None, amount=0):
         """Update account transaction log"""
-        statement = 'Your Account History\n----------------------\n'
-        with open(self._account_history, 'r+') as account_log:
-            lines = account_log.readlines()
-            if not lines:
-                account_log.write(statement)
+        statement = 'Your Account History\n----------------------\n' # This will be used as file heading
+        # Automatically create the 'account_log.txt' file where we log 
+        # account transactions using the with context context manager
+        # It eliminates the error of not closing the file before exiting
+        # our program which could cause problems later when we try 
+        # writing to the file
+        with open(self._account_history, 'r+') as account_log: # open the file in read-write mode
+            lines = account_log.readlines() 
+           
+            if not lines:                       # Check to see if file has any contents
+                account_log.write(statement)    # if not, append our header to it.
 
             if action == 'd' and amount > 0:
                 account_log.write('DEPOSIT: %s\n' % amount)
@@ -81,6 +87,6 @@ class BankAccount:
 
 if __name__ == '__main__':
     a = BankAccount(500)
-    
     a + 250
+    a - 150
     a.print_account_statement()

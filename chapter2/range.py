@@ -25,5 +25,12 @@ class Range:
         return self._length
         
     
-    def 
-    
+    def __getitem__(self, key):
+        """Return entry at index key(using standard interpretation if negative)"""
+        if k < 0:
+            k += len(self)
+        
+        if not 0 <= k < self._length:
+            raise IndexError('index out of range')
+        
+        return self._start + k * self._step
