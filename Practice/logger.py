@@ -18,7 +18,7 @@ class Logger(object):
             self._write_log('ERROR', msg)
         
         def warn(self, msg):
-            self._write_log('WARN', msg)
+            self._write_log('WARNING', msg)
 
         def info(self, msg):
             self._write_log('INFO', msg)
