@@ -35,4 +35,11 @@ class Progression:
         return self
     
     def print_progression(self, n):
-        
+        """Print next n values of the progression."""
+        print(' '.join(str(next(self)) for j in range(n)))
+
+
+if __name__ == '__main__':
+    print('Default progression: ')
+    seq = Progression(5)
+    seq.print_progression(10)
